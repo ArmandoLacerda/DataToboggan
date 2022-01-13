@@ -1,0 +1,26 @@
+{
+	"name": "Pipeline 1",
+	"properties": {
+		"activities": [
+			{
+				"name": "change Var1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "var1",
+					"value": "Oi mundo"
+				}
+			}
+		],
+		"variables": {
+			"var1": {
+				"type": "String",
+				"defaultValue": "Hello world"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-01-13T05:33:01Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

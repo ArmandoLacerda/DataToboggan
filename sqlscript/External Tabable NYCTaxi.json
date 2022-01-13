@@ -1,0 +1,17 @@
+{
+	"name": "External Tabable NYCTaxi",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'lake_toboggandemo_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [lake_toboggandemo_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://lake@toboggandemo.dfs.core.windows.net' \n\t)\nGO\n\nCREATE SCHEMA green\nGO\n\nCREATE EXTERNAL TABLE green.nyctaxi (\n\t[vendorID] int,\n\t[lpepPickupDatetime] datetime2(7),\n\t[lpepDropoffDatetime] datetime2(7),\n\t[passengerCount] int,\n\t[tripDistance] float,\n\t[puLocationId] nvarchar(4000),\n\t[doLocationId] nvarchar(4000),\n\t[pickupLongitude] float,\n\t[pickupLatitude] float,\n\t[dropoffLongitude] float,\n\t[dropoffLatitude] float,\n\t[rateCodeID] int,\n\t[storeAndFwdFlag] nvarchar(4000),\n\t[paymentType] int,\n\t[fareAmount] float,\n\t[extra] float,\n\t[mtaTax] float,\n\t[improvementSurcharge] nvarchar(4000),\n\t[tipAmount] float,\n\t[tollsAmount] float,\n\t[ehailFee] float,\n\t[totalAmount] float,\n\t[tripType] int\n\t)\n\tWITH (\n\tLOCATION = 'green/puYear=*/puMonth=*/*.parquet',\n\tDATA_SOURCE = [lake_toboggandemo_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM green.nyctaxi\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "datatoboggan",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
