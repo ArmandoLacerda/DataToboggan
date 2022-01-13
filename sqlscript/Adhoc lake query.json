@@ -2,7 +2,7 @@
 	"name": "Adhoc lake query",
 	"properties": {
 		"content": {
-			"query": "-- This is auto-generated code\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'https://toboggandemo.dfs.core.windows.net/lake/green/puYear=*/puMonth=*/*.parquet',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n",
+			"query": "-- This is auto-generated code\nSELECT\n    TOP 1500 *\nFROM\n    OPENROWSET(\n        BULK 'https://toboggandemo.dfs.core.windows.net/lake/green/puYear=*/puMonth=*/*.parquet',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n",
 			"metadata": {
 				"language": "sql"
 			},
